@@ -1,0 +1,496 @@
+.wrap {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.logo {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagline {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0.35rem 0 0;
+  font-style: italic;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0.6rem 0 0;
+  opacity: 0.9;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card,
+.qrCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card:focus-within,
+.qrCard:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 1px var(--border-focus);
+}
+
+.cardTitle {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1rem;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+
+.label span {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.labelRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  opacity: 0.9;
+}
+
+.phoneRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.phoneCode {
+  width: 8.5rem;
+  flex-shrink: 0;
+  padding: 0.7rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.phoneCode:hover {
+  border-color: rgba(148, 163, 255, 0.25);
+}
+
+.phoneInput {
+  flex: 1;
+  min-width: 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text);
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.phoneInput:hover {
+  border-color: rgba(148, 163, 255, 0.25);
+}
+
+.phoneInput:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text);
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:hover,
+.textarea:hover {
+  border-color: rgba(148, 163, 255, 0.25);
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.inputError {
+  border-color: var(--err) !important;
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.3);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.errorText {
+  font-size: 0.8rem;
+  color: var(--err);
+}
+
+.socialSection {
+  margin-top: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.socialTitle {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: var(--text);
+}
+
+.socialDesc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+}
+
+.socialList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.socialRow {
+  display: grid;
+  grid-template-columns: auto minmax(5rem, auto) 1fr;
+  grid-template-rows: auto auto;
+  gap: 0.35rem 0.75rem;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.socialIcon {
+  grid-column: 1;
+  grid-row: 1;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  opacity: 0.85;
+}
+
+.socialName {
+  grid-column: 2;
+  grid-row: 1;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.socialInput,
+.socialInputError {
+  grid-column: 3;
+  grid-row: 1;
+  min-width: 0;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.socialInput:hover,
+.socialInputError:hover {
+  border-color: rgba(148, 163, 255, 0.25);
+}
+
+.socialInput:focus,
+.socialInputError:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.socialInputError {
+  border-color: var(--err);
+}
+
+.socialRow .errorText {
+  grid-column: 2 / -1;
+  grid-row: 2;
+  margin: 0;
+  padding-left: 0;
+}
+
+/* QR bölümü — tıklanabilir bağlantılar */
+.linksBlock {
+  text-align: left;
+  width: 100%;
+  padding: 1rem;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.linksTitle {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: var(--text);
+}
+
+.linksDesc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+}
+
+.linkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.linkList li {
+  display: block;
+}
+
+.linkItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.4rem 0;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.linkItem:hover {
+  color: var(--text);
+  background: rgba(167, 139, 250, 0.1);
+}
+
+.linkItem svg {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.formError {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  color: var(--err);
+}
+
+.actions {
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.primaryBtn {
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+  color: #fff;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.primaryBtn:hover {
+  box-shadow: 0 4px 20px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.primaryBtn:active {
+  transform: translateY(0);
+}
+
+.qrCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  animation: qrCardIn 0.4s ease-out;
+}
+
+.qrCard .linksBlock {
+  align-self: stretch;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+@keyframes qrCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.qrHint {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.qrWrap {
+  display: inline-flex;
+  padding: 1.25rem;
+  background: #fff;
+  border-radius: var(--radius);
+}
+
+.qr {
+  display: block;
+}
+
+.qrActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.secondaryBtn {
+  padding: 0.7rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: var(--bg-input);
+  color: var(--text);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.secondaryBtn:hover {
+  border-color: var(--accent);
+  background: rgba(167, 139, 250, 0.08);
+}
+
+.ghostBtn {
+  padding: 0.7rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  transition: color 0.2s, background 0.2s;
+}
+
+.ghostBtn:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .socialRow {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .socialIcon {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .socialName {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .socialInput,
+  .socialInputError {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .socialRow .errorText {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .phoneRow {
+    flex-direction: column;
+  }
+
+  .phoneCode {
+    width: 100%;
+  }
+}
