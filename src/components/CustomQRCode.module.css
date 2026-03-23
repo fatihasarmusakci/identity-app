@@ -1,0 +1,186 @@
+.qrWrapper {
+  display: inline-flex;
+  position: relative;
+  background: #ffffff;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+}
+
+.qrInner {
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.qrCode {
+  display: block !important;
+  transition: all 0.3s ease;
+}
+
+/* Shape Styles */
+.shapeCircle .qrCode {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.shapeRounded .qrCode {
+  border-radius: 20%;
+  overflow: hidden;
+}
+
+/* Frame Styles */
+.frameClassic {
+  background: linear-gradient(145deg, #2a2a3e, #16161d);
+  padding: 8px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.frameClassic .qrInner {
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+.frameBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #a78bfa;
+}
+
+.corner[data-position="top-left"] {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner[data-position="top-right"] {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner[data-position="bottom-left"] {
+  bottom: 10px;
+  left: 10px;
+  border-right: none;
+  border-top: none;
+}
+
+.corner[data-position="bottom-right"] {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+.frameModern {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 6px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+}
+
+.frameModern .qrInner {
+  background: #ffffff;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.modernFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(167, 139, 250, 0.1) 50%,
+    transparent 70%
+  );
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.frameMinimal {
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.frameMinimal .qrInner {
+  padding: 0.75rem;
+}
+
+/* Hover Effects */
+.qrWrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(167, 139, 250, 0.3);
+}
+
+.frameModern:hover .glow {
+  animation-duration: 1.5s;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .qrWrapper {
+    max-width: 100%;
+  }
+  
+  .corner {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .corner[data-position="top-left"] {
+    top: 8px;
+    left: 8px;
+  }
+  
+  .corner[data-position="top-right"] {
+    top: 8px;
+    right: 8px;
+  }
+  
+  .corner[data-position="bottom-left"] {
+    bottom: 8px;
+    left: 8px;
+  }
+  
+  .corner[data-position="bottom-right"] {
+    bottom: 8px;
+    right: 8px;
+  }
+}

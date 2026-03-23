@@ -3,7 +3,8 @@ import type { IdentityFormData, FieldErrors, SocialKey } from '../types'
 import { SOCIAL_KEYS, SOCIAL_LABELS, COUNTRY_PHONE_CODES } from '../types'
 import { getEmailError, getUrlError } from '../lib/validation'
 import { buildVCard, downloadVCard } from '../lib/vcard'
-import { QRCodeSVG } from 'qrcode.react'
+import CustomQRCode from './CustomQRCode'
+import QRCustomizer, { type QRCustomOptions } from './QRCustomizer'
 import {
   User,
   Mail,
@@ -23,7 +24,7 @@ import {
 } from 'lucide-react'
 import styles from './IdentityForm.module.css'
 
-const SOCIAL_ICONS: Record<SocialKey, React.ComponentType<{ size?: number; className?: string }>> = {
+const SOCIAL_ICONS: Record<SocialKey, React.ComponentType<any>> = {
   linkedin: Linkedin,
   instagram: Instagram,
   twitter: Twitter,
@@ -74,6 +75,15 @@ export default function IdentityForm() {
   const [errors, setErrors] = useState<FieldErrors>({})
   const [showQR, setShowQR] = useState(false)
   const [touched, setTouched] = useState<Record<string, boolean>>({})
+  const [qrOptions, setQrOptions] = useState<QRCustomOptions>({
+    fgColor: '#000000',
+    bgColor: '#FFFFFF',
+    size: 220,
+    level: 'M',
+    includeMargin: true,
+    shape: 'square',
+    frame: 'none'
+  })
 
   const update = useCallback((field: keyof IdentityFormData, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -290,8 +300,10 @@ export default function IdentityForm() {
             <h2 className={styles.cardTitle}>Share</h2>
             <p className={styles.qrHint}>Others can scan this QR code to add your contact to their device.</p>
             <div className={styles.qrWrap}>
-              <QRCodeSVG value={vcard} size={220} level="M" includeMargin className={styles.qr} />
+              <CustomQRCode value={vcard} options={qrOptions} className={styles.qr} />
             </div>
+
+            <QRCustomizer onCustomize={setQrOptions} />
 
             {hasLinks && (
               <div className={styles.linksBlock}>

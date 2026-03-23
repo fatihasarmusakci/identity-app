@@ -1,0 +1,183 @@
+.customizer {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-top: 1rem;
+  backdrop-filter: blur(12px);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  color: var(--text);
+  background: rgba(167, 139, 250, 0.1);
+}
+
+.tab.active {
+  color: var(--accent);
+  background: rgba(167, 139, 250, 0.15);
+  font-weight: 500;
+}
+
+.content {
+  min-height: 200px;
+}
+
+.colorSection h4,
+.shapeSection h4,
+.frameSection h4 {
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.presets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.preset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.preview {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.customColors {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.colorInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.colorInput label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.colorInput input[type="color"] {
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: transparent;
+}
+
+.colorInput input[type="color"]:hover {
+  border-color: var(--accent);
+}
+
+.shapeOptions,
+.frameOptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.75rem;
+}
+
+.shapeOption,
+.frameOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shapeOption:hover,
+.frameOption:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.shapeOption.active,
+.frameOption.active {
+  border-color: var(--accent);
+  background: rgba(167, 139, 250, 0.15);
+  color: var(--accent);
+}
+
+.shapeIcon {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .tabs {
+    gap: 0.25rem;
+  }
+  
+  .tab {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .presets {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .customColors {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

@@ -22,6 +22,12 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 
 .tagline {
@@ -161,18 +167,40 @@
   background: var(--bg-input);
   color: var(--text);
   font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .input:hover,
 .textarea:hover {
   border-color: rgba(148, 163, 255, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(167, 139, 250, 0.1);
 }
 
 .input:focus,
 .textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
+  box-shadow: 0 0 0 3px var(--accent-glow), 0 8px 30px rgba(167, 139, 250, 0.2);
+  transform: translateY(-2px);
+}
+
+.input::before,
+.textarea::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.input:focus::before,
+.textarea:focus::before {
+  left: 100%;
 }
 
 .inputError {
@@ -374,23 +402,40 @@
   align-items: center;
   gap: 1rem;
   text-align: center;
-  animation: qrCardIn 0.4s ease-out;
+  animation: qrCardIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
 }
 
-.qrCard .linksBlock {
-  align-self: stretch;
-  text-align: left;
-  margin-bottom: 0;
+.qrCard::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--accent), var(--accent-dim), var(--accent));
+  border-radius: var(--radius);
+  opacity: 0;
+  z-index: -1;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.3; }
 }
 
 @keyframes qrCardIn {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(20px) scale(0.9);
   }
-  to {
+  50% {
+    transform: translateY(-5px) scale(1.02);
+  }
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -405,6 +450,7 @@
   padding: 1.25rem;
   background: #fff;
   border-radius: var(--radius);
+  margin-bottom: 1rem;
 }
 
 .qr {
