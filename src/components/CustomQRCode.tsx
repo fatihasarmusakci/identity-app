@@ -9,6 +9,29 @@ interface CustomQRCodeProps {
 }
 
 export default function CustomQRCode({ value, options, className }: CustomQRCodeProps) {
+  const downloadQRCode = () => {
+    const svg = document.querySelector(`.${className || ''} .${styles.qrCode}`) as SVGElement
+    if (!svg) return
+    
+    const svgData = new XMLSerializer().serializeToString(svg)
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    const img = new Image()
+    
+    img.onload = () => {
+      canvas.width = options.size
+      canvas.height = options.size
+      ctx?.drawImage(img, 0, 0)
+      
+      const pngFile = canvas.toDataURL('image/png')
+      const downloadLink = document.createElement('a')
+      downloadLink.download = 'qrcode.png'
+      downloadLink.href = pngFile
+      downloadLink.click()
+    }
+    
+    img.src = 'data:image/svg+xml;base64,' + btoa(svgData)
+  }
   const getFrameClass = () => {
     switch (options.frame) {
       case 'classic':
@@ -23,14 +46,8 @@ export default function CustomQRCode({ value, options, className }: CustomQRCode
   }
 
   const getShapeClass = () => {
-    switch (options.shape) {
-      case 'circle':
-        return styles.shapeCircle
-      case 'rounded':
-        return styles.shapeRounded
-      default:
-        return ''
-    }
+    // Only square shape is available now
+    return ''
   }
 
   return (
@@ -65,6 +82,14 @@ export default function CustomQRCode({ value, options, className }: CustomQRCode
       {options.frame === 'minimal' && (
         <div className={styles.minimalFrame}></div>
       )}
+      
+      <button 
+        onClick={downloadQRCode}
+        className={styles.downloadBtn}
+        title="QR Kodu İndir"
+      >
+        ⬇
+      </button>
     </div>
   )
 }

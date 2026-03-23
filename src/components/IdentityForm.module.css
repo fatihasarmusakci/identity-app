@@ -396,6 +396,18 @@
   transform: translateY(0);
 }
 
+.primaryBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.primaryBtn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .qrCard {
   display: flex;
   flex-direction: column;
@@ -478,6 +490,12 @@
 .secondaryBtn:hover {
   border-color: var(--accent);
   background: rgba(167, 139, 250, 0.08);
+}
+
+.secondaryBtn.success {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
 }
 
 .ghostBtn {

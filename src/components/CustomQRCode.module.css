@@ -16,16 +16,7 @@
   transition: all 0.3s ease;
 }
 
-/* Shape Styles */
-.shapeCircle .qrCode {
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.shapeRounded .qrCode {
-  border-radius: 20%;
-  overflow: hidden;
-}
+/* Shape Styles - Only square available */
 
 /* Frame Styles */
 .frameClassic {
@@ -33,6 +24,7 @@
   padding: 8px;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 .frameClassic .qrInner {
@@ -47,6 +39,7 @@
   right: 0;
   bottom: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
 .corner {
@@ -89,6 +82,7 @@
   padding: 6px;
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+  position: relative;
 }
 
 .frameModern .qrInner {
@@ -105,6 +99,7 @@
   right: 0;
   bottom: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
 .glow {
@@ -137,6 +132,7 @@
   padding: 12px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .frameMinimal .qrInner {
@@ -153,10 +149,50 @@
   animation-duration: 1.5s;
 }
 
+/* Download Button */
+.downloadBtn {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  color: white;
+  border: 3px solid white;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.downloadBtn:hover {
+  background: var(--accent-dim);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.downloadBtn:active {
+  transform: scale(0.95);
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .qrWrapper {
     max-width: 100%;
+  }
+  
+  .frameClassic {
+    padding: 6px;
+    border-radius: 12px;
+  }
+  
+  .frameClassic .qrInner {
+    border-radius: 8px;
   }
   
   .corner {
@@ -182,5 +218,27 @@
   .corner[data-position="bottom-right"] {
     bottom: 8px;
     right: 8px;
+  }
+  
+  .frameModern {
+    padding: 4px;
+    border-radius: 16px;
+  }
+  
+  .frameModern .qrInner {
+    border-radius: 12px;
+  }
+  
+  .frameMinimal {
+    padding: 8px;
+    border-radius: 6px;
+  }
+  
+  .downloadBtn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    bottom: -8px;
+    right: -8px;
   }
 }

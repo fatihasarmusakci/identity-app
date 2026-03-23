@@ -12,7 +12,7 @@ export interface QRCustomOptions {
   size: number
   level: 'L' | 'M' | 'Q' | 'H'
   includeMargin: boolean
-  shape: 'square' | 'circle' | 'rounded'
+  shape: 'square'
   frame: 'none' | 'classic' | 'modern' | 'minimal'
 }
 
@@ -118,9 +118,7 @@ export default function QRCustomizer({ onCustomize }: QRCustomizerProps) {
             <h4>QR Kod Şekli</h4>
             <div className={styles.shapeOptions}>
               {[
-                { value: 'square', label: 'Kare', icon: '■' },
-                { value: 'circle', label: 'Yuvarlak', icon: '●' },
-                { value: 'rounded', label: 'Yuvarlaklı', icon: '▢' }
+                { value: 'square', label: 'Kare', icon: '■' }
               ].map((shape) => (
                 <button
                   key={shape.value}

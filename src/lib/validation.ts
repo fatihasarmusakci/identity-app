@@ -15,12 +15,12 @@ export function isValidUrl(value: string): boolean {
 
 export function getEmailError(value: string): string | undefined {
   if (!value.trim()) return undefined
-  if (!isValidEmail(value)) return 'Please enter a valid email address.'
+  if (!isValidEmail(value)) return 'Lütfen geçerli bir e-posta adresi girin.'
   return undefined
 }
 
 export function getUrlError(value: string): string | undefined {
   if (!value.trim()) return undefined
-  if (!isValidUrl(value)) return 'Please enter a valid URL (e.g. https://...).'
+  if (!isValidUrl(value)) return 'Lütfen geçerli bir URL girin (örn: https://...).'
   return undefined
 }
