@@ -1,4 +1,4 @@
-import type { IdentityFormData, SocialKey } from '../types'
+import type { IdentityFormData } from '../types'
 import { SOCIAL_KEYS } from '../types'
 
 function escapeVCard(value: string): string {
@@ -22,19 +22,19 @@ function foldLine(line: string, maxLen = 75): string {
 }
 
 export function buildVCard(data: IdentityFormData): string {
-  const lines: string[] = ['BEGIN:VCARD', 'VERSION:4.0']
+  const lines: string[] = ['BEGIN:VCARD', 'VERSION:4.0', 'CHARSET=UTF-8']
 
   const family = (data.lastName || '').trim()
   const given = (data.firstName || '').trim()
   if (family || given) {
-    lines.push(foldLine(`N:${escapeVCard(family)};${escapeVCard(given)};;;`))
+    lines.push(foldLine(`N;CHARSET=UTF-8:${escapeVCard(family)};${escapeVCard(given)};;;`))
   }
 
   const fullName = [given, family].filter(Boolean).join(' ') || 'Unknown'
-  lines.push(foldLine(`FN:${escapeVCard(fullName)}`))
+  lines.push(foldLine(`FN;CHARSET=UTF-8:${escapeVCard(fullName)}`))
 
   const email = (data.email || '').trim()
-  if (email) lines.push(foldLine(`EMAIL:${escapeVCard(email)}`))
+  if (email) lines.push(foldLine(`EMAIL;CHARSET=UTF-8:${escapeVCard(email)}`))
 
   const code = (data.phoneCountryCode || '+90').trim()
   let tel = (data.phone || '').trim().replace(/\s/g, '')
@@ -42,27 +42,27 @@ export function buildVCard(data: IdentityFormData): string {
     const codeNum = code.replace(/\D/g, '')
     if (codeNum === '90' && tel.startsWith('0')) tel = tel.slice(1)
     const full = code.replace(/^\+/, '') + tel
-    lines.push(foldLine(`TEL;TYPE=cell:${escapeVCard('+' + full)}`))
+    lines.push(foldLine(`TEL;TYPE=cell;CHARSET=UTF-8:${escapeVCard('+' + full)}`))
   }
 
   let url = (data.website || '').trim()
   if (url && !/^https?:\/\//i.test(url)) url = 'https://' + url
-  if (url) lines.push(foldLine(`URL:${escapeVCard(url)}`))
+  if (url) lines.push(foldLine(`URL;CHARSET=UTF-8:${escapeVCard(url)}`))
 
   const org = (data.company || '').trim()
-  if (org) lines.push(foldLine(`ORG:${escapeVCard(org)}`))
+  if (org) lines.push(foldLine(`ORG;CHARSET=UTF-8:${escapeVCard(org)}`))
 
   const title = (data.title || '').trim()
-  if (title) lines.push(foldLine(`TITLE:${escapeVCard(title)}`))
+  if (title) lines.push(foldLine(`TITLE;CHARSET=UTF-8:${escapeVCard(title)}`))
 
   const note = (data.note || '').trim()
-  if (note) lines.push(foldLine(`NOTE:${escapeVCard(note)}`))
+  if (note) lines.push(foldLine(`NOTE;CHARSET=UTF-8:${escapeVCard(note)}`))
 
   for (const key of SOCIAL_KEYS) {
     let socialUrl = (data.social[key] || '').trim()
     if (!socialUrl) continue
     if (!/^https?:\/\//i.test(socialUrl)) socialUrl = 'https://' + socialUrl
-    lines.push(foldLine(`URL:${escapeVCard(socialUrl)}`))
+    lines.push(foldLine(`URL;CHARSET=UTF-8:${escapeVCard(socialUrl)}`))
   }
 
   lines.push('END:VCARD')

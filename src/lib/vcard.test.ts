@@ -33,7 +33,7 @@ describe('buildVCard', () => {
 
   it('hiç alan dolu değilse FN:Unknown içerir', () => {
     const vcard = buildVCard(emptyForm())
-    expect(vcard).toContain('FN:Unknown')
+    expect(vcard).toContain('FN;CHARSET=UTF-8:Unknown')
   })
 
   it('ad ve soyad ile N ve FN alanlarını doğru üretir', () => {
@@ -41,16 +41,16 @@ describe('buildVCard', () => {
     form.firstName = 'Ali'
     form.lastName = 'Yılmaz'
     const vcard = buildVCard(form)
-    expect(vcard).toContain('N:Yılmaz;Ali;;;')
-    expect(vcard).toContain('FN:Ali Yılmaz')
+    expect(vcard).toContain('N;CHARSET=UTF-8:Yılmaz;Ali;;;')
+    expect(vcard).toContain('FN;CHARSET=UTF-8:Ali Yılmaz')
   })
 
   it('sadece ad verildiğinde N ve FN doğrudur', () => {
     const form = emptyForm()
     form.firstName = 'Ayşe'
     const vcard = buildVCard(form)
-    expect(vcard).toContain('FN:Ayşe')
-    expect(vcard).toMatch(/N:;Ayşe;;;/)
+    expect(vcard).toContain('FN;CHARSET=UTF-8:Ayşe')
+    expect(vcard).toMatch(/N;CHARSET=UTF-8:;Ayşe;;;/)
   })
 
   it('e-posta, telefon, web sitesi ekler', () => {
@@ -61,9 +61,9 @@ describe('buildVCard', () => {
     form.phone = '0555 123 45 67'
     form.website = 'https://example.com'
     const vcard = buildVCard(form)
-    expect(vcard).toContain('EMAIL:test@example.com')
-    expect(vcard).toContain('TEL;TYPE=cell:+905551234567')
-    expect(vcard).toContain('URL:https://example.com')
+    expect(vcard).toContain('EMAIL;CHARSET=UTF-8:test@example.com')
+    expect(vcard).toContain('TEL;TYPE=cell;CHARSET=UTF-8:+905551234567')
+    expect(vcard).toContain('URL;CHARSET=UTF-8:https://example.com')
   })
 
   it('web sitesine https ekler (yoksa)', () => {
@@ -71,7 +71,7 @@ describe('buildVCard', () => {
     form.firstName = 'X'
     form.website = 'example.com'
     const vcard = buildVCard(form)
-    expect(vcard).toContain('URL:https://example.com')
+    expect(vcard).toContain('URL;CHARSET=UTF-8:https://example.com')
   })
 
   it('şirket ve ünvan ekler', () => {
@@ -80,8 +80,8 @@ describe('buildVCard', () => {
     form.company = 'Acme'
     form.title = 'Developer'
     const vcard = buildVCard(form)
-    expect(vcard).toContain('ORG:Acme')
-    expect(vcard).toContain('TITLE:Developer')
+    expect(vcard).toContain('ORG;CHARSET=UTF-8:Acme')
+    expect(vcard).toContain('TITLE;CHARSET=UTF-8:Developer')
   })
 
   it('not alanını ekler', () => {
@@ -89,7 +89,7 @@ describe('buildVCard', () => {
     form.firstName = 'A'
     form.note = 'Merhaba dünya'
     const vcard = buildVCard(form)
-    expect(vcard).toContain('NOTE:Merhaba dünya')
+    expect(vcard).toContain('NOTE;CHARSET=UTF-8:Merhaba dünya')
   })
 
   it('doldurulmuş sosyal medya URL’lerini ekler', () => {
@@ -98,8 +98,8 @@ describe('buildVCard', () => {
     form.social.linkedin = 'https://linkedin.com/in/user'
     form.social.instagram = 'instagram.com/account'
     const vcard = buildVCard(form)
-    expect(vcard).toContain('URL:https://linkedin.com/in/user')
-    expect(vcard).toContain('URL:https://instagram.com/account')
+    expect(vcard).toContain('URL;CHARSET=UTF-8:https://linkedin.com/in/user')
+    expect(vcard).toContain('URL;CHARSET=UTF-8:https://instagram.com/account')
   })
 
   it('boş alanları VCF’e eklemez', () => {
@@ -119,6 +119,16 @@ describe('buildVCard', () => {
     const vcard = buildVCard(form)
     expect(vcard).toContain('\\;')
     expect(vcard).toContain('\\,')
+  })
+
+  it('Türkçe karakterleri doğru işler', () => {
+    const form = emptyForm()
+    form.firstName = 'Çişğ'
+    form.lastName = 'ÖÜışİğ'
+    const vcard = buildVCard(form)
+    expect(vcard).toContain('CHARSET=UTF-8')
+    expect(vcard).toContain('FN;CHARSET=UTF-8:Çişğ ÖÜışİğ')
+    expect(vcard).toContain('N;CHARSET=UTF-8:ÖÜışİğ;Çişğ;;;')
   })
 })
 
